@@ -1,0 +1,32 @@
+{
+  "name": "backbone-pg",
+  "version": "0.0.1",
+  "description": "A lightweight wrapper around node-postgres using Backbone collections",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulovieira/backbone-pg.git"
+  },
+  "keywords": [
+    "backbone",
+    "postgres",
+    "node"
+  ],
+  "author": "Paulo Vieira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulovieira/backbone-pg/issues"
+  },
+  "homepage": "https://github.com/paulovieira/backbone-pg",
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "change-case-keys": "^0.0.2",
+    "pg": "^4.1.1",
+    "pg-native": "^1.7.3",
+    "q": "^1.1.2",
+    "underscore": "^1.7.0"
+  }
+}
