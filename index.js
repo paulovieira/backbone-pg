@@ -23,7 +23,12 @@ Backbone.Collection.prototype.execute = function(options) {
 
 	// change the case of the keys (or the objects in the result.rows array); pass false to disable;
 	// should be one of: "camelize" (default), "underscored" or "dasherize" (underscore.string methods)
-	if(options.changeCase !== false){  options.changeCase = options.changeCase || "camelize";  }
+	options.changeCase = _.result(options, "changeCase");
+	if(options.changeCase==="undefined"){ options.changeCase = _.result(collection, "changeCase"); }
+
+	if(options.changeCase !== false){  
+		options.changeCase = _.isString(options.changeCase) ? options.changeCase : "camelize";
+	}
 
 	promise = this
 			.sync(this, options)
@@ -105,7 +110,7 @@ debugger;
 			if(err) {  deferred.reject(err); return;  }
 
 			// change the case of the keys
-			if(options.changeCase !== false){ 
+			if(options.changeCase){ 
 				changeCaseKeys(result.rows, options.changeCase);
 			}
 			deferred.resolve(result.rows);
