@@ -6,6 +6,7 @@ var Backbone = require("backbone"),
 var changeCaseKeys = require('change-case-keys');
 
 
+
 /*
 The execute method will simply do this:
 1) call Backbone.syncPostgres (overriden), passing the correct arguments; syncPostgres will return a Q promise
@@ -13,13 +14,15 @@ The execute method will simply do this:
 2) if the promise is fulfilled, parse the data (optional) and set/reset the collection;
 3) if the promise is rejected, throw the error
 
-Note: the .then method returns a new promise, which we retun to the caller
+Note: the .then method returns a new promise, which we retun to the callerdd
 */
+
 Backbone.Collection.prototype.execute = function(options) {
     var promise,
-        options = options || {},
         collection = this,
         method = options.reset ? "reset" : "set";
+
+    options = options || {};
 
     // change the case of the keys (or the objects in the result.rows array); pass false to disable;
     // should be one of: "camelize" (default), "underscored" or "dasherize" (underscore.string methods)
@@ -62,7 +65,7 @@ Backbone.Collection.prototype.execute = function(options) {
 
 Backbone.Collection.prototype.sync = function() {
     return Backbone.syncPostgres.apply(this, arguments);
-},
+};
 
 
 /***
@@ -129,6 +132,7 @@ Backbone.syncPostgres = function(entity, options) {
     });
 
     entity.trigger('request', entity, options.promise, options);
+
     return deferred.promise;
 };
 
