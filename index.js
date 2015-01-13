@@ -53,6 +53,7 @@ Backbone.Collection.prototype.execute = function(options) {
 
                 return resp;
             },
+            
             function(err) {
                 debugger;
                 collection.trigger('error', collection, err, options);
