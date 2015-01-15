@@ -1,6 +1,6 @@
 {
   "name": "backbone-pg",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A lightweight wrapper around node-postgres using Backbone collections",
   "main": "index.js",
   "scripts": {
