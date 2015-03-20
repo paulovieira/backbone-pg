@@ -1,10 +1,8 @@
 var Backbone = require("backbone"),
     _ = require('underscore'),
     Q = require('q'),
-    pg = require('pg').native;
-
-var changeCaseKeys = require('change-case-keys');
-
+    pg = require('pg').native,
+    changeCaseKeys = require('change-case-keys');
 
 
 /*
@@ -69,11 +67,11 @@ Backbone.Collection.prototype.sync = function() {
 };
 
 
-/***
+/*
 Backbone.syncPostgres has a role similiar to Backbone.sync in the browser; it's where 
 we use the pg module connect to the database, execute the command (options.query) and
 update the collection with the output (either through .set() or .reset())
-****/
+*/
 
 Backbone.syncPostgres = function(entity, options) {
     //debugger;
@@ -109,8 +107,9 @@ Backbone.syncPostgres = function(entity, options) {
             return;
         }
 
-        // currently we are using simple parameterized queries; later we should switch to Prepared Statements:
-        // more info: https://github.com/brianc/node-postgres/wiki/Prepared-Statements
+        // currently we are using simple parameterized queries; later we might consiser
+        // switching to Prepared Statements. More info:
+        // https://github.com/brianc/node-postgres/wiki/Prepared-Statements
         client.query(options.query.command, options.query.arguments, function(err, result) {
 
             done();
@@ -120,9 +119,12 @@ Backbone.syncPostgres = function(entity, options) {
                 return;
             }
 
-            // change the case of the keys
+            // change the case of the keys (only for the top-level properties)
+            // NOTE: if we have an array of objects, the recursion level should be 2
+            // so that the keys of the objects are affected
+
             if (options.changeCase) {
-                changeCaseKeys(result.rows, options.changeCase);
+                changeCaseKeys(result.rows, options.changeCase, 2);
             }
             deferred.resolve(result.rows);
 

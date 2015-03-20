@@ -1,6 +1,6 @@
 {
   "name": "backbone-pg",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A lightweight wrapper around node-postgres using Backbone collections",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   "homepage": "https://github.com/paulovieira/backbone-pg",
   "dependencies": {
     "backbone": "^1.1.2",
-    "change-case-keys": "^0.0.2",
+    "change-case-keys": "^0.0.4",
     "pg": "^4.1.1",
     "pg-native": "^1.7.3",
     "q": "^1.1.2",
